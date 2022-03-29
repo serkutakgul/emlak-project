@@ -30,7 +30,7 @@ public class Emlak implements Serializable {
         return mulkSahibi;
     }
 
-    @JsonManagedReference//sonsuz çıktı için
+    //@JsonManagedReference//sonsuz çıktı için
 
     public void setMulkSahibi(MulkSahibi mulkSahibi) {
         this.mulkSahibi = mulkSahibi;

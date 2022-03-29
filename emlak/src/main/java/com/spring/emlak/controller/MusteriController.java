@@ -27,8 +27,8 @@ public class MusteriController {
         return musteriListe;
 
     }
-    @PostMapping("/")
-    public MulkSahibi createMusteri(@RequestBody MulkSahibi ms) {
+    @PostMapping("/create")
+    public MulkSahibi createMusteri( MulkSahibi ms) {
         String isim = ms.getAdSoyad();
         String eposta = ms.getEposta();
 
