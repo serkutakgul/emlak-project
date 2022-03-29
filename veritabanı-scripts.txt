@@ -1,0 +1,79 @@
+-- Table: public.emlak
+
+-- DROP TABLE IF EXISTS public.emlak;
+
+CREATE TABLE IF NOT EXISTS public.emlak
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    sehir character varying(50) COLLATE pg_catalog."default",
+    kat integer,
+    oda integer,
+    alan double precision,
+    kira boolean,
+    fiyat double precision,
+    sahip_id integer,
+    CONSTRAINT emlak_pkey PRIMARY KEY (id),
+    CONSTRAINT sahip_fk FOREIGN KEY (sahip_id)
+        REFERENCES public.mulk_sahibi (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.emlak
+    OWNER to postgres;
+-- Index: fki_sahip_fk
+
+-- DROP INDEX IF EXISTS public.fki_sahip_fk;
+
+CREATE INDEX IF NOT EXISTS fki_sahip_fk
+    ON public.emlak USING btree
+    (sahip_id ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+-------------------------------------------------------------------
+-- Table: public.is_yeri
+
+-- DROP TABLE IF EXISTS public.is_yeri;
+
+CREATE TABLE IF NOT EXISTS public.is_yeri
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    unvan character varying COLLATE pg_catalog."default",
+    sehir character varying COLLATE pg_catalog."default",
+    yetkili character varying COLLATE pg_catalog."default",
+    telefon character varying COLLATE pg_catalog."default",
+    CONSTRAINT is_yeri_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.is_yeri
+    OWNER to postgres;
+-----------------------------------------------------------------------
+-- Table: public.mulk_sahibi
+
+-- DROP TABLE IF EXISTS public.mulk_sahibi;
+
+CREATE TABLE IF NOT EXISTS public.mulk_sahibi
+(
+    id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    ad_soyad character varying(50) COLLATE pg_catalog."default",
+    telefon character varying(50) COLLATE pg_catalog."default",
+    eposta character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT mulk_sahibi_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.mulk_sahibi
+    OWNER to postgres;
+
+
+
+
+
+
+
+
